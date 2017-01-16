@@ -229,6 +229,7 @@ bool sam4l_probe(target *t)
 	t->idcode = target_mem_read32(t, SAM4L_CHIPID_CIDR);
 	if (((t->idcode >> CHIPID_CIDR_ARCH_SHIFT) & CHIPID_CIDR_ARCH_MASK) == SAM4L_ARCH) {
 		t->driver = "Atmel SAM4L";
+		t->target_options |= CORTEXM_TOPT_INHIBIT_SRST;
 		/* this function says we need to do "extra" stuff after reset */
 		t->extended_reset = sam4l_extended_reset;
 		ram_size = sam_ram_size(t->idcode);
